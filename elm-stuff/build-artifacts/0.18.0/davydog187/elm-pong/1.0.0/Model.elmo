@@ -1,0 +1,44 @@
+var _davydog187$elm_pong$Model$player = F2(
+	function (initialX, initialY) {
+		return {x: initialX, y: initialY, vx: 0, vy: 0, score: 0};
+	});
+var _davydog187$elm_pong$Model$Ball = F4(
+	function (a, b, c, d) {
+		return {x: a, y: b, vx: c, vy: d};
+	});
+var _davydog187$elm_pong$Model$Player = F5(
+	function (a, b, c, d, e) {
+		return {x: a, y: b, vx: c, vy: d, score: e};
+	});
+var _davydog187$elm_pong$Model$Game = F7(
+	function (a, b, c, d, e, f, g) {
+		return {keysDown: a, windowDimensions: b, state: c, ball: d, player1: e, player2: f, middleBar: g};
+	});
+var _davydog187$elm_pong$Model$Input = F6(
+	function (a, b, c, d, e, f) {
+		return {space: a, reset: b, pause: c, dir1: d, dir2: e, delta: f};
+	});
+var _davydog187$elm_pong$Model$NoOp = {ctor: 'NoOp'};
+var _davydog187$elm_pong$Model$Tick = function (a) {
+	return {ctor: 'Tick', _0: a};
+};
+var _davydog187$elm_pong$Model$WindowResize = function (a) {
+	return {ctor: 'WindowResize', _0: a};
+};
+var _davydog187$elm_pong$Model$KeyUp = function (a) {
+	return {ctor: 'KeyUp', _0: a};
+};
+var _davydog187$elm_pong$Model$KeyDown = function (a) {
+	return {ctor: 'KeyDown', _0: a};
+};
+var _davydog187$elm_pong$Model$Pause = {ctor: 'Pause'};
+var _davydog187$elm_pong$Model$initialGame = {
+	keysDown: _elm_lang$core$Set$empty,
+	windowDimensions: {ctor: '_Tuple2', _0: 0, _1: 0},
+	state: _davydog187$elm_pong$Model$Pause,
+	ball: A4(_davydog187$elm_pong$Model$Ball, 0, 0, 200, 200),
+	player1: A2(_davydog187$elm_pong$Model$player, 20 - _davydog187$elm_pong$Variables$halfWidth, 0),
+	player2: A2(_davydog187$elm_pong$Model$player, _davydog187$elm_pong$Variables$halfWidth - 20, 0),
+	middleBar: A2(_davydog187$elm_pong$Model$player, 0, -100)
+};
+var _davydog187$elm_pong$Model$Play = {ctor: 'Play'};

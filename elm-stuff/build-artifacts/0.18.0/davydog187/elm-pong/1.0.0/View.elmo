@@ -1,0 +1,124 @@
+var _davydog187$elm_pong$View$make = F3(
+	function (obj, color, shape) {
+		return A2(
+			_evancz$elm_graphics$Collage$move,
+			{ctor: '_Tuple2', _0: obj.x, _1: obj.y},
+			A2(_evancz$elm_graphics$Collage$filled, color, shape));
+	});
+var _davydog187$elm_pong$View$pauseMessage = 'SPACE to start, P to pause, R to reset, WS and &uarr;&darr; to move';
+var _davydog187$elm_pong$View$textColor = _davydog187$elm_pong$Variables$myLightBlue;
+var _davydog187$elm_pong$View$txt = function (f) {
+	return function (_p0) {
+		return _evancz$elm_graphics$Element$leftAligned(
+			f(
+				_evancz$elm_graphics$Text$monospace(
+					A2(
+						_evancz$elm_graphics$Text$color,
+						_davydog187$elm_pong$View$textColor,
+						_evancz$elm_graphics$Text$fromString(_p0)))));
+	};
+};
+var _davydog187$elm_pong$View$backgroundColor = _davydog187$elm_pong$Variables$myBlue;
+var _davydog187$elm_pong$View$verticalLine = function (height) {
+	return _evancz$elm_graphics$Collage$path(
+		{
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 0, _1: height},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 0, _1: 0 - height},
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _davydog187$elm_pong$View$statusMessage = function (state) {
+	var _p1 = state;
+	if (_p1.ctor === 'Play') {
+		return A2(_davydog187$elm_pong$View$txt, _elm_lang$core$Basics$identity, '');
+	} else {
+		return A2(_davydog187$elm_pong$View$txt, _elm_lang$core$Basics$identity, _davydog187$elm_pong$View$pauseMessage);
+	}
+};
+var _davydog187$elm_pong$View$view = function (_p2) {
+	var _p3 = _p2;
+	var _p6 = _p3.player2;
+	var _p5 = _p3.player1;
+	var _p4 = _p3.windowDimensions;
+	var w = _p4._0;
+	var h = _p4._1;
+	var scores = A2(
+		_davydog187$elm_pong$View$txt,
+		_evancz$elm_graphics$Text$height(50),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(_p5.score),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'  ',
+				_elm_lang$core$Basics$toString(_p6.score))));
+	return _evancz$elm_graphics$Element$toHtml(
+		A4(
+			_evancz$elm_graphics$Element$container,
+			w,
+			h,
+			_evancz$elm_graphics$Element$middle,
+			A3(
+				_evancz$elm_graphics$Collage$collage,
+				_davydog187$elm_pong$Variables$gameWidth,
+				_davydog187$elm_pong$Variables$gameHeight,
+				{
+					ctor: '::',
+					_0: A2(
+						_evancz$elm_graphics$Collage$filled,
+						_davydog187$elm_pong$View$backgroundColor,
+						A2(_evancz$elm_graphics$Collage$rect, _davydog187$elm_pong$Variables$gameWidth, _davydog187$elm_pong$Variables$gameHeight)),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_davydog187$elm_pong$View$make,
+							_p3.ball,
+							_elm_lang$core$Color$white,
+							A2(_evancz$elm_graphics$Collage$oval, _davydog187$elm_pong$Variables$defaultBallSize, _davydog187$elm_pong$Variables$defaultBallSize)),
+						_1: {
+							ctor: '::',
+							_0: A3(
+								_davydog187$elm_pong$View$make,
+								_p5,
+								_elm_lang$core$Color$white,
+								A2(_evancz$elm_graphics$Collage$rect, 10, _davydog187$elm_pong$Variables$defaultBarLength)),
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_davydog187$elm_pong$View$make,
+									_p6,
+									_elm_lang$core$Color$white,
+									A2(_evancz$elm_graphics$Collage$rect, 10, _davydog187$elm_pong$Variables$defaultBarLength)),
+								_1: {
+									ctor: '::',
+									_0: A3(
+										_davydog187$elm_pong$View$make,
+										_p3.middleBar,
+										_davydog187$elm_pong$Variables$myRed,
+										A2(_evancz$elm_graphics$Collage$rect, 10, _davydog187$elm_pong$Variables$defaultBarLength)),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_evancz$elm_graphics$Collage$move,
+											{ctor: '_Tuple2', _0: 0, _1: (_davydog187$elm_pong$Variables$gameHeight / 2) - 40},
+											_evancz$elm_graphics$Collage$toForm(scores)),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_evancz$elm_graphics$Collage$move,
+												{ctor: '_Tuple2', _0: 0, _1: 40 - (_davydog187$elm_pong$Variables$gameHeight / 2)},
+												_evancz$elm_graphics$Collage$toForm(
+													_davydog187$elm_pong$View$statusMessage(_p3.state))),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				})));
+};

@@ -1,0 +1,102 @@
+var _davydog187$elm_pong$Update$stepV = F3(
+	function (v, lowerCollision, upperCollision) {
+		return lowerCollision ? _elm_lang$core$Basics$abs(v) : (upperCollision ? (0 - _elm_lang$core$Basics$abs(v)) : v);
+	});
+var _davydog187$elm_pong$Update$near = F3(
+	function (k, c, n) {
+		return (_elm_lang$core$Native_Utils.cmp(n, k - c) > -1) && (_elm_lang$core$Native_Utils.cmp(n, k + c) < 1);
+	});
+var _davydog187$elm_pong$Update$within = F2(
+	function (ball, paddle) {
+		return A3(_davydog187$elm_pong$Update$near, paddle.x, 8, ball.x) && A3(_davydog187$elm_pong$Update$near, paddle.y, 20, ball.y);
+	});
+var _davydog187$elm_pong$Update$physicsUpdate = F2(
+	function (t, _p0) {
+		var _p1 = _p0;
+		return _elm_lang$core$Native_Utils.update(
+			_p1,
+			{x: _p1.x + (_p1.vx * t), y: _p1.y + (_p1.vy * t)});
+	});
+var _davydog187$elm_pong$Update$updateComputer = F3(
+	function (ball, points, player) {
+		return _elm_lang$core$Native_Utils.update(
+			player,
+			{
+				y: A3(_elm_lang$core$Basics$clamp, 22 - _davydog187$elm_pong$Variables$halfHeight, _davydog187$elm_pong$Variables$halfHeight - 22, ball.y),
+				score: player.score + points
+			});
+	});
+var _davydog187$elm_pong$Update$updatePlayer = F4(
+	function (dt, dir, points, player) {
+		var movedPlayer = A2(
+			_davydog187$elm_pong$Update$physicsUpdate,
+			dt,
+			_elm_lang$core$Native_Utils.update(
+				player,
+				{
+					vy: _elm_lang$core$Basics$toFloat(dir) * 200
+				}));
+		return _elm_lang$core$Native_Utils.update(
+			movedPlayer,
+			{
+				y: A3(_elm_lang$core$Basics$clamp, 22 - _davydog187$elm_pong$Variables$halfHeight, _davydog187$elm_pong$Variables$halfHeight - 22, movedPlayer.y),
+				score: player.score + points
+			});
+	});
+var _davydog187$elm_pong$Update$updateBall = F5(
+	function (t, _p2, p1, p2, mb) {
+		var _p3 = _p2;
+		var _p5 = _p3.y;
+		var _p4 = _p3;
+		return (!A3(_davydog187$elm_pong$Update$near, 0, _davydog187$elm_pong$Variables$halfWidth, _p4.x)) ? _elm_lang$core$Native_Utils.update(
+			_p4,
+			{x: 0, y: 0}) : A2(
+			_davydog187$elm_pong$Update$physicsUpdate,
+			t,
+			_elm_lang$core$Native_Utils.update(
+				_p4,
+				{
+					vx: A3(
+						_davydog187$elm_pong$Update$stepV,
+						_p3.vx,
+						A2(_davydog187$elm_pong$Update$within, _p4, p1),
+						A2(_davydog187$elm_pong$Update$within, _p4, p2)),
+					vy: A3(
+						_davydog187$elm_pong$Update$stepV,
+						_p3.vy,
+						_elm_lang$core$Native_Utils.cmp(_p5, 7 - _davydog187$elm_pong$Variables$halfHeight) < 0,
+						_elm_lang$core$Native_Utils.cmp(_p5, _davydog187$elm_pong$Variables$halfHeight - 7) > 0)
+				}));
+	});
+var _davydog187$elm_pong$Update$updateGame = F2(
+	function (_p7, _p6) {
+		var _p8 = _p7;
+		var _p15 = _p8.delta;
+		var _p9 = _p6;
+		var _p14 = _p9.state;
+		var _p13 = _p9.player2;
+		var _p12 = _p9.player1;
+		var _p11 = _p9;
+		var _p10 = _p9.ball;
+		var newBall = _elm_lang$core$Native_Utils.eq(_p14, _davydog187$elm_pong$Model$Pause) ? _p10 : A5(_davydog187$elm_pong$Update$updateBall, _p15, _p10, _p12, _p13, _p9.middleBar);
+		var score2 = (_elm_lang$core$Native_Utils.cmp(_p10.x, 0 - _davydog187$elm_pong$Variables$halfWidth) < 0) ? 1 : 0;
+		var score1 = (_elm_lang$core$Native_Utils.cmp(_p10.x, _davydog187$elm_pong$Variables$halfWidth) > 0) ? 1 : 0;
+		var newState = _p8.space ? _davydog187$elm_pong$Model$Play : (_p8.pause ? _davydog187$elm_pong$Model$Pause : ((!_elm_lang$core$Native_Utils.eq(score1, score2)) ? _davydog187$elm_pong$Model$Pause : _p14));
+		return _p8.reset ? _elm_lang$core$Native_Utils.update(
+			_p11,
+			{
+				state: _davydog187$elm_pong$Model$Pause,
+				ball: A4(_davydog187$elm_pong$Model$Ball, 0, 0, 200, 200),
+				player1: A2(_davydog187$elm_pong$Model$player, 20 - _davydog187$elm_pong$Variables$halfWidth, 0),
+				player2: A2(_davydog187$elm_pong$Model$player, _davydog187$elm_pong$Variables$halfWidth - 20, 0),
+				middleBar: A2(_davydog187$elm_pong$Model$player, 0, -100)
+			}) : _elm_lang$core$Native_Utils.update(
+			_p11,
+			{
+				state: newState,
+				ball: newBall,
+				player1: A4(_davydog187$elm_pong$Update$updatePlayer, _p15, _p8.dir1, score1, _p12),
+				player2: A4(_davydog187$elm_pong$Update$updatePlayer, _p15, _p8.dir2, score2, _p13),
+				middleBar: A3(_davydog187$elm_pong$Update$updateComputer, newBall, score2, _p13)
+			});
+	});

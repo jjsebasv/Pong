@@ -1,0 +1,5 @@
+var _davydog187$elm_pong$Colors$myRed = A3(_elm_lang$core$Color$rgb, 230, 73, 73);
+var _davydog187$elm_pong$Colors$myLightBlue = A3(_elm_lang$core$Color$rgb, 93, 203, 240);
+var _davydog187$elm_pong$Colors$myBlue = A3(_elm_lang$core$Color$rgb, 76, 164, 194);
+var _davydog187$elm_pong$Colors$myLightGreen = A3(_elm_lang$core$Color$rgb, 160, 200, 160);
+var _davydog187$elm_pong$Colors$myGreen = A3(_elm_lang$core$Color$rgb, 60, 100, 60);

@@ -1,0 +1,14 @@
+var _davydog187$elm_pong$Variables$defaultBallSize = 15;
+var _davydog187$elm_pong$Variables$defaultBarLength = 70;
+var _davydog187$elm_pong$Variables$defaultScreenSize = {ctor: '_Tuple2', _0: 800, _1: 600};
+var _davydog187$elm_pong$Variables$_p0 = _davydog187$elm_pong$Variables$defaultScreenSize;
+var _davydog187$elm_pong$Variables$gameWidth = _davydog187$elm_pong$Variables$_p0._0;
+var _davydog187$elm_pong$Variables$gameHeight = _davydog187$elm_pong$Variables$_p0._1;
+var _davydog187$elm_pong$Variables$_p1 = {ctor: '_Tuple2', _0: _davydog187$elm_pong$Variables$gameWidth / 2, _1: _davydog187$elm_pong$Variables$gameHeight / 2};
+var _davydog187$elm_pong$Variables$halfWidth = _davydog187$elm_pong$Variables$_p1._0;
+var _davydog187$elm_pong$Variables$halfHeight = _davydog187$elm_pong$Variables$_p1._1;
+var _davydog187$elm_pong$Variables$myRed = A3(_elm_lang$core$Color$rgb, 230, 73, 73);
+var _davydog187$elm_pong$Variables$myLightBlue = A3(_elm_lang$core$Color$rgb, 93, 203, 240);
+var _davydog187$elm_pong$Variables$myBlue = A3(_elm_lang$core$Color$rgb, 76, 164, 194);
+var _davydog187$elm_pong$Variables$myLightGreen = A3(_elm_lang$core$Color$rgb, 160, 200, 160);
+var _davydog187$elm_pong$Variables$myGreen = A3(_elm_lang$core$Color$rgb, 60, 100, 60);

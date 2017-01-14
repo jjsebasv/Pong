@@ -1,0 +1,106 @@
+var _davydog187$elm_pong$Main$sizeToMsg = function (size) {
+	return _davydog187$elm_pong$Model$WindowResize(
+		{ctor: '_Tuple2', _0: size.width, _1: size.height});
+};
+var _davydog187$elm_pong$Main$initialSizeCmd = A2(_elm_lang$core$Task$perform, _davydog187$elm_pong$Main$sizeToMsg, _elm_lang$window$Window$size);
+var _davydog187$elm_pong$Main$subscriptions = function (_p0) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: _elm_lang$keyboard$Keyboard$downs(_davydog187$elm_pong$Model$KeyDown),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$keyboard$Keyboard$ups(_davydog187$elm_pong$Model$KeyUp),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$window$Window$resizes(_davydog187$elm_pong$Main$sizeToMsg),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$animation_frame$AnimationFrame$diffs(_davydog187$elm_pong$Model$Tick),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _davydog187$elm_pong$Main$getInput = F2(
+	function (game, delta) {
+		return {
+			space: A2(
+				_elm_lang$core$Set$member,
+				_elm_lang$core$Char$toCode(
+					_elm_lang$core$Native_Utils.chr(' ')),
+				game.keysDown),
+			reset: A2(
+				_elm_lang$core$Set$member,
+				_elm_lang$core$Char$toCode(
+					_elm_lang$core$Native_Utils.chr('R')),
+				game.keysDown),
+			pause: A2(
+				_elm_lang$core$Set$member,
+				_elm_lang$core$Char$toCode(
+					_elm_lang$core$Native_Utils.chr('P')),
+				game.keysDown),
+			dir1: A2(
+				_elm_lang$core$Set$member,
+				_elm_lang$core$Char$toCode(
+					_elm_lang$core$Native_Utils.chr('W')),
+				game.keysDown) ? 1 : (A2(
+				_elm_lang$core$Set$member,
+				_elm_lang$core$Char$toCode(
+					_elm_lang$core$Native_Utils.chr('S')),
+				game.keysDown) ? -1 : 0),
+			dir2: A2(_elm_lang$core$Set$member, 38, game.keysDown) ? 1 : (A2(_elm_lang$core$Set$member, 40, game.keysDown) ? -1 : 0),
+			delta: _elm_lang$core$Time$inSeconds(delta)
+		};
+	});
+var _davydog187$elm_pong$Main$update = F2(
+	function (msg, game) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
+			case 'KeyDown':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						game,
+						{
+							keysDown: A2(_elm_lang$core$Set$insert, _p1._0, game.keysDown)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'KeyUp':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						game,
+						{
+							keysDown: A2(_elm_lang$core$Set$remove, _p1._0, game.keysDown)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Tick':
+				var input = A2(_davydog187$elm_pong$Main$getInput, game, _p1._0);
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_davydog187$elm_pong$Update$updateGame, input, game),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'WindowResize':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						game,
+						{windowDimensions: _p1._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {ctor: '_Tuple2', _0: game, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _davydog187$elm_pong$Main$main = _elm_lang$html$Html$program(
+	{
+		init: {ctor: '_Tuple2', _0: _davydog187$elm_pong$Model$initialGame, _1: _davydog187$elm_pong$Main$initialSizeCmd},
+		view: _davydog187$elm_pong$View$view,
+		update: _davydog187$elm_pong$Main$update,
+		subscriptions: _davydog187$elm_pong$Main$subscriptions
+	})();
