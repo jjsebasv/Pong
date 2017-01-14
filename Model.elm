@@ -25,7 +25,8 @@ type alias Player = {
     y: Float,
     vx: Float,
     vy: Float,
-    score: Int
+    score: Int,
+    name: Int
 }
 
 type alias Game =
@@ -35,16 +36,18 @@ type alias Game =
     ball: Ball,
     player1: Player,
     player2: Player,
-    middleBar: Player
+    middleBar: Player,
+    lastone: Player
   }
 
-player : Float -> Float -> Player
-player initialX initialY =
+player : Float -> Float -> Int -> Player
+player initialX initialY playerNumber =
   { x = initialX,
     y = initialY,
     vx = 0,
     vy = 0,
-    score = 0
+    score = 0,
+    name = playerNumber
   }
 
 initialGame =

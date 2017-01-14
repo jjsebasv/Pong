@@ -10,9 +10,9 @@ import Text
 import Html exposing (..)
 
 view : Game -> Html Msg
-view {windowDimensions, state, ball, player1, player2, middleBar} =
+view {windowDimensions, state, ball, player1, player2, middleBar, lastone} =
   let scores : Element
-      scores = txt (Text.height 50) (toString player1.score ++ "  " ++ toString player2.score)
+      scores = txt (Text.height 50) (toString player1.score ++ "  " ++ toString player2.score ++ " last " ++ toString lastone.player.name)
       (w,h) = windowDimensions
   in
       toHtml <|

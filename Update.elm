@@ -2,10 +2,10 @@ module Update exposing (..)
 
 import Model exposing (..)
 import Time exposing (..)
-import Variables exposing
+import Variables exposing (..)
 
 updateGame : Input -> Game -> Game
-updateGame {space, reset, pause, dir1, dir2, delta} ({state, ball, player1, player2, middleBar} as game) =
+updateGame {space, reset, pause, dir1, dir2, delta} ({state, ball, player1, player2, middleBar, lastone} as game) =
   let score1 = if ball.x >  halfWidth then 1 else 0
       score2 = if ball.x < -halfWidth then 1 else 0
 
