@@ -3,5 +3,8 @@ Install elm by using
 
 [Visit `https://guide.elm-lang.org/install.html` for more details]
 
-To run elm server use, at the root of the project 
+Compile the project running
+`elm-make Main.elm`
+
+To run elm server use, at the root of the project
 `elm-reactor`
